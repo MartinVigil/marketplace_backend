@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketplace</title>
+</head>
+<body>
+    {% csrf_token %}
+    <ul>
+    {% for category_name in category_names %}
+        <li><h1>{{ category_name }}</h1></li>
+        <ol>
+        {% for product_name in products_names %}
+            {% if product_name.product.selled == False %}
+                {% if product_name.product.category == category_name %}
+                    <ul><h3><img src={{ product_name.product.image.url }} width="100" height="100">  
+                        {{ product_name.product.name }} | precio: ${{ product_name.product.price }} | descripcion: {{ product_name.product.description }} |vendedor: {{ product_name.username }} 
+                        <a href="{% url 'mark_as_selled' product_name.product.id %}"><button>comprar</button></a>
+                    </h3>
+                    </ul>
+                {% endif %}
+            {% endif %}   
+        {% endfor %}    
+        </ol> 
+    {% endfor %}
+    </ul>
+    <h3><a href="/logout">logout</a></h3>
+    <h3><a href="/myproducts">mis productos</a></h3>
+    <h3><a href="/buys">mis compras</a></h3>
+</body>
+</html>

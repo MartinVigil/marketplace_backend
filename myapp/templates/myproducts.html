@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MarketPlace</title>
+</head>
+<body>
+    <h1>mis productos</h1>
+        {% if products_names %}
+            {% for product in products_names %}
+                <ul><h3><img src={{ product.image.url }} width="100" height="100">  
+                    {{ product.name }} | categoria: {{ product.category }} | precio: ${{ product.price }} | descripcion: {{ product.description }} 
+                    <button><a href="{% url 'update_product' product.id %}">Actualizar</a></button>
+                    <button><a href="{% url 'delete_product' product.id %}" onclick="return confirmDelete();">Eliminar</a></button>
+                </h3>
+                </ul>
+            {% endfor %}  
+        {% else %}
+            <h2>no tenes productos</h2>     
+        {% endif %}
+     <a href="/addproducts/"><h3>agregar productos</h3></a>    
+     <a href="/marketplace/"><h3>productos</h3></a>   
+</body>
+    <script>
+        function confirmDelete() {
+            return confirm("¿Estás seguro de que deseas eliminar este producto?");
+        }
+    </script>
+</html>

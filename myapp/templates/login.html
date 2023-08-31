@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MarketPlace</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Iniciar Sesión</h2>
+        <h3>{{response}}</h3>
+        <form method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+
+            <button>
+                Enviar
+            </button>
+        </form>
+    </div>
+    <h4><a href="/register">Registrate</a></h4>
+</body>
+</html>
